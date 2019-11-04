@@ -1,0 +1,6 @@
+node_modules/
+build/
+react-app-env.d.ts
+serviceWorker.ts
+!**/.*
+src/**/*.test.js
