@@ -12,16 +12,12 @@ import ordersReducer, {
 const pageNode = 'home';
 
 const action = async ({ store }: IRouterDependecies) => {
-  const workers = [];
+  // const workers = [];
 
   injectAsyncReducer(store, 'orders', ordersReducer);
   injectAsyncSaga(store, 'form-watcher', formWatcherSaga);
 
-  workers.push(store.dispatch(fetchOrdersAction({ page: 1 })));
-  // workers.push(store.dispatch(fetchSomeData2()));
-  // workers.push(store.dispatch(fetchSomeData3()));
-  // debugger;
-  await Promise.all(workers);
+  store.dispatch(fetchOrdersAction({ page: 1 }));
 
   return {
     title: 'Home',
