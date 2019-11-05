@@ -1,23 +1,26 @@
 import { handleActions } from 'redux-actions';
-import { SET_ERROR, REMOVE_ERROR } from './constants';
-import { TestFormStateType } from './types';
+import { SET_ORDERS, SET_ERROR } from './actions';
+import { OrdersState, Order } from './types';
 
 const initialState = {
-  errorTextValue: '',
+  orders: [],
+  error: '',
 };
 
 const reducer = handleActions(
   {
-    [SET_ERROR]: (
-      state: TestFormStateType,
-      { payload }: { payload: string },
+    [SET_ORDERS]: (
+      state: OrdersState,
+      { payload }: { payload: Array<Order> },
     ) => ({
       ...state,
-      errorTextValue: payload,
+      orders: payload,
+      error: null,
     }),
-    [REMOVE_ERROR]: (state: TestFormStateType) => ({
+    [SET_ERROR]: (state: OrdersState, { payload }: { payload: any }) => ({
       ...state,
-      errorTextValue: '',
+      orders: [],
+      error: payload,
     }),
   },
   initialState,

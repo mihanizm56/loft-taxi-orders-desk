@@ -68,6 +68,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     'no-case-declarations': 0,
+    'dot-notation': 0,
   },
   settings: {
     'import/resolver': {

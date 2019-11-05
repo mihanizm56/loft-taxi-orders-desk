@@ -1,28 +1,10 @@
 // place to define requests
 
-// EXAMPLES !!!!
-import {
-  postRequest,
-  //  putRequest,
-  // patchRequest,
-  //  getRequest
-} from './rest';
-import { getAuthEndpoint } from './endpoints';
+import { getRequest } from './rest';
+import { getOrdersEndPoint } from './endpoints';
 
-// EXAMPLES !!!!
-export const fetchLoginRequest = ({ username, password }) =>
-  postRequest({
-    endpoint: getAuthEndpoint(),
-    data: { username, password },
+// возвращается промис
+export const ordersRequest = (page: number): Promise<any> =>
+  getRequest({
+    endpoint: `${getOrdersEndPoint()}/paginate?page=${page}`,
   });
-
-// any just for the example
-export const mockRequest = (values: any): Promise<any> => {
-  console.info(values);
-
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({ error: 'test error' });
-    }, 2000);
-  });
-};

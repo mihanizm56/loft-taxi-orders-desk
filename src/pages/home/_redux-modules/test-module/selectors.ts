@@ -1,14 +1,9 @@
 import { createSelector } from 'reselect';
-import { FullStoreType } from './types';
+import { OrdersState, Order } from './types';
 
-const testFormStorageSelector = (store: FullStoreType) => store.testFormStorage;
+const ordersStorageSelector = (store: OrdersState) => store.orders;
 
-export const errorTextSelector = createSelector(
-  [testFormStorageSelector],
-  testFormStorage => (testFormStorage ? testFormStorage.errorTextValue : null),
-);
-
-export const getTestFormError = createSelector(
-  [errorTextSelector],
-  error => error,
+export const getOrders = createSelector(
+  [ordersStorageSelector],
+  (orders: Array<Order>) => orders,
 );

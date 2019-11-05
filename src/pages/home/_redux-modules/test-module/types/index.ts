@@ -1,17 +1,11 @@
-export type TestFormStateType = {
-  errorTextValue: string;
+export type Order = {
+  username: string;
+  fromText: string;
+  toText: string;
+  timestamp: string;
 };
 
-export type FullStoreType = {
-  testFormStorage: TestFormStateType;
-};
-
-export type SubmitFormActionParams = {
-  failedActionType?: string;
-  resetError?: string;
-  success?: string;
-  loading?: string;
-  formValues: any; // any just for example
-  url: string;
-  method: string;
+export type OrdersState = {
+  orders: Array<Order>;
+  error: string;
 };

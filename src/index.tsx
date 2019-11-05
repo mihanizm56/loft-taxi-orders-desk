@@ -5,7 +5,9 @@ import { RouterProvider } from 'react-router5';
 import { configureRouter } from './modules/router';
 import { createAppStore } from '@/modules/_redux-store';
 import { RouteNode } from './modules/router/components';
-import './index.module.scss';
+import './_styles/index.css';
+import './_styles/variables.css';
+import './_assets/fonts/index.css';
 
 const ROOT_ELEMENT = document.getElementById('root');
 

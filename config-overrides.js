@@ -1,4 +1,5 @@
-const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
+const { override, addWebpackModuleRule } = require('customize-cra'); // eslint-disable-line
+const path = require('path'); // eslint-disable-line
 
 module.exports = (config /* , env */) => {
   return {

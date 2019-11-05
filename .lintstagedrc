@@ -2,7 +2,8 @@
     "*.{ts,tsx,js}": [
         "eslint --ext .ts,.js,.tsx --max-warnings=2",
     ],
-    "*.scss": [
+    "*.{css,scss}": [
+        "stylelint --fix",
         "stylelint",
     ]
 }
