@@ -1,23 +1,15 @@
 import * as React from 'react';
 import { Route } from 'router5';
-// import styleNames from 'classnames';
-import './index.css';
+import styleNames from 'classnames';
+// import { Scroller } from '../../_containers/scroller';
+import styles from './index.module.scss';
 
-import { OrderCard } from '../order-card';
-
-// const sn = styleNames(styles);
+const cx = styleNames.bind(styles);
 
 interface IPageProps {
   route: Route;
 }
 
 export const Page = ({ route }: IPageProps) => (
-  <div className="page">
-    <OrderCard
-      done
-      index={1}
-      username="test-username111111111111111111111111111111111111111111111111111111111"
-      timestamp="123222222222222222222222222222222222222222222222222222222222222222"
-    />
-  </div>
+  <div className={cx('page')}>{/* <Scroller /> */}</div>
 );

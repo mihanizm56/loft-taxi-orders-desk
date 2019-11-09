@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { RouteNode } from '@/modules/router/components';
+import { RouteNode } from '@/services/router/components';
 import { injectAsyncReducer } from '@/_utils/redux/inject-reducers';
 import { injectAsyncSaga } from '@/_utils/redux/inject-sagas';
-import { IRouterDependecies } from '@/modules/router/_types';
+import { IRouterDependecies } from '@/services/router/_types';
 import { Page } from './_components/page';
 import ordersReducer, {
   formWatcherSaga,
   fetchOrdersAction,
-} from './_redux-modules/test-module';
+} from './_redux/orders';
 
 const pageNode = 'home';
 
