@@ -2,6 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames/bind';
 import { IconOrderDone } from '../icon-components/icon-order-done';
 import { IconOrderProgress } from '../icon-components/icon-order-progress';
+import { timeFormatter } from '@/_utils/time-formatter';
 import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
@@ -39,7 +40,7 @@ export const OrderCard = ({
         </li>
         <li className={cx('order-card-list-data-item')}>
           <span className={cx('order-card-list-data__text')}>
-            Дата заказа: {timestamp}
+            Дата заказа: {timeFormatter(timestamp)}
           </span>
         </li>
       </ul>

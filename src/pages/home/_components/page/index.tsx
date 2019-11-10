@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route } from 'router5';
-import { OrdersList } from '../orders-list';
+import { OrdersList } from '../../_containers/orders-list';
 import styles from './index.module.scss';
 
 interface IPageProps {

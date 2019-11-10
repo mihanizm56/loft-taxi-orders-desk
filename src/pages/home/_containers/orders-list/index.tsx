@@ -12,7 +12,7 @@ import {
   fetchOrdersAction,
   getLoadingStatus,
 } from '../../_redux/orders';
-import { OrderCard } from '../order-card';
+import { OrderCard } from '../../_components/order-card';
 import { LoadingTextIndicator } from '@/_components/loading-text-indicator';
 
 // constant for heigth of element in row
