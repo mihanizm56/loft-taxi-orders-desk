@@ -17,6 +17,7 @@
     "node-sass": "^4.13.0",
     "promise-sequential": "1.1.1",
     "react": "16.11.0",
+    "react-app-rewired": "2.1.4",
     "react-dom": "16.11.0",
     "react-final-form": "6.3.0",
     "react-redux": "7.1.1",
@@ -27,14 +28,14 @@
     "react-window-infinite-loader": "^1.0.5",
     "redux": "4.0.4",
     "redux-actions": "2.6.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-saga": "1.1.1",
     "reselect": "4.0.0",
     "router5": "7.0.2",
     "router5-helpers": "7.0.1",
     "router5-plugin-browser": "7.0.2",
     "router5-plugin-logger": "7.0.2",
-    "typescript": "3.6.4",
-    "react-app-rewired": "2.1.4"
+    "typescript": "3.6.4"
   },
   "scripts": {
     "start": "react-app-rewired start",

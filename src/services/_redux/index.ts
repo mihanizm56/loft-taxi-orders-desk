@@ -1,5 +1,6 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createReducer } from '@/_utils/redux/create-reducer';
 import { rootReducer } from './root-reducer';
 import { IAdvancedStore } from './_types';
@@ -9,11 +10,7 @@ export const createAppStore = () => {
 
   const store: IAdvancedStore = createStore(
     createReducer({ prevState: rootReducer }),
-    compose(
-      applyMiddleware(sagaMiddleware),
-      (window as any).__REDUX_DEVTOOLS_EXTENSION__ && // eslint-disable-line
-        (window as any).__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line
-    ),
+    composeWithDevTools(applyMiddleware(sagaMiddleware)),
   );
 
   // Add a dictionary to keep track of the registered async reducers sagas
