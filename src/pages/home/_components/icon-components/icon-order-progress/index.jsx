@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
 export const IconOrderProgress = () => (
-  <svg height="70px" viewBox="0 0 64 64" width="70px">
+  <svg height="50px" viewBox="0 0 64 64" width="50px">
     <g id="process">
       <rect fill="#ffdaaa" height="58" rx="2" width="40" x="3" y="3" />
       <path

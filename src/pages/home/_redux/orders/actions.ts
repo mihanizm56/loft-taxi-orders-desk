@@ -1,4 +1,4 @@
-import { createAction, Action } from 'redux-actions';
+import { createAction, Action, BaseAction } from 'redux-actions';
 import { OrdersStoreType } from './types';
 
 export const SET_ORDERS = 'SET_ORDERS';
@@ -21,3 +21,9 @@ export const fetchOrdersAction: ({
   numberOfViewItems: number;
   listData: any;
 }> = createAction(FETCH_ORDERS);
+
+export const LOADING_START = 'LOADING_START';
+export const setLoadingStart: () => BaseAction = createAction(LOADING_START);
+
+export const LOADING_END = 'LOADING_END';
+export const setLoadingStop: () => BaseAction = createAction(LOADING_END);

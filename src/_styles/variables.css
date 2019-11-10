@@ -1,5 +1,6 @@
 :root {
   --font-family-main: "Roboto", "Arial", "sans-serif";
+  --font-size-title: 25px;
   --font-size-main: 16px;
   --font-size-card-title: 18px;
   --color-button-text: #000;

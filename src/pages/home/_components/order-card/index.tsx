@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { IconOrderDone } from '../icon-order-done';
-import { IconOrderProgress } from '../icon-order-progress';
-import './index.css';
+import classNames from 'classnames/bind';
+import { IconOrderDone } from '../icon-components/icon-order-done';
+import { IconOrderProgress } from '../icon-components/icon-order-progress';
+import styles from './index.module.scss';
+
+const cx = classNames.bind(styles);
 
 type OrderCardParams = {
   index: number;
@@ -16,18 +19,28 @@ export const OrderCard = ({
   username,
   timestamp,
 }: OrderCardParams) => (
-  <div className="order-card-wrapper">
-    <div className="order-card-wrapper__column order-card-wrapper__column--order-first">
+  <div className={cx('order-card-wrapper')}>
+    <div
+      className={cx('order-card-wrapper__column', {
+        'order-card-wrapper__column--order-first': true,
+      })}
+    >
       {done ? <IconOrderDone /> : <IconOrderProgress />}
     </div>
-    <div className="order-card-wrapper__column order-card-wrapper__column--order-second">
-      <h4 className="order-card-list__title">Заказ номер {index}</h4>
-      <ul className="order-card-list-data">
-        <li className="order-card-list-data-item">
+    <div
+      className={cx('order-card-wrapper__column', {
+        'order-card-wrapper__column--order-second': true,
+      })}
+    >
+      <h4 className={cx('order-card-list__title')}>Заказ номер {index}</h4>
+      <ul className={cx('order-card-list-data')}>
+        <li className={cx('order-card-list-data-item')}>
           <span>Пользователь: {username}</span>
         </li>
-        <li className="order-card-list-data-item">
-          <span>Дата заказа: {timestamp}</span>
+        <li className={cx('order-card-list-data-item')}>
+          <span className={cx('order-card-list-data__text')}>
+            Дата заказа: {timestamp}
+          </span>
         </li>
       </ul>
     </div>

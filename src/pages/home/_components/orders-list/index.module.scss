@@ -5,8 +5,40 @@
   height: 100vh;
 }
 
-.list-window {
+.scrollerListWrapper {
   width: 90vw;
-  height: 400px;
-  border: 1px solid #f00;
+  height: 100%;
+}
+
+.scrollerList {
+  overflow-x: hidden;
+  border: 1px solid #808080;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    background-color: #808080;
+    border-radius: 5px;
+  }
+}
+
+
+.scrollerRow {
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (max-width: 600px) {
+  .scrollerListWrapper {
+    width: 100vw;
+  }
+
+  .scrollerList {
+    border: none;
+  }
 }

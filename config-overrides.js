@@ -4,7 +4,7 @@ const path = require('path'); // eslint-disable-line
 module.exports = (config /* , env */) => {
   return {
     ...config,
-    entry: [...config.entry, 'babel-polyfill'],
+    entry: ['babel-polyfill', ...config.entry],
     resolve: {
       ...config.resolve,
       alias: {

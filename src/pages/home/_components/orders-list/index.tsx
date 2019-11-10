@@ -10,9 +10,13 @@ import {
   getTotalNumberOfItems,
   getNumberOfViewItems,
   fetchOrdersAction,
+  getLoadingStatus,
 } from '../../_redux/orders';
+import { OrderCard } from '../order-card';
+import { LoadingTextIndicator } from '@/_components/loading-text-indicator';
 
-const ITEM_SIZE = 35;
+// constant for heigth of element in row
+const ITEM_SIZE = 110;
 const cx = classNames.bind(styles);
 
 interface IProps {
@@ -20,26 +24,24 @@ interface IProps {
   numberOfViewItems: (store: any) => any;
   totalNumberOfItems: number;
   fetchListData: (payload: any) => any;
+  isLoading: boolean;
 }
 
 class WrappedComponent extends Component<IProps> {
   requestCache: { [key: string]: string } = {};
 
-  componentDidUpdate() {
-    console.log('UPDATED, PROPS', this.props);
-  }
+  // componentDidUpdate() {
+  //   console.log('UPDATED, PROPS', this.props);
+  // }
 
   isItemLoaded = indexOfItem => Boolean(this.props.listData[indexOfItem]);
 
   loadItems = async (visibleStartIndex, visibleStopIndex) => {
-    console.log('triggers load data', visibleStartIndex, visibleStopIndex);
-
     const { listData, numberOfViewItems, fetchListData } = this.props;
 
     const keyToCache = `${visibleStartIndex}:${visibleStopIndex}`; // 0:10 format
 
     if (this.requestCache[keyToCache]) {
-      console.log('gets in cache');
       return;
     }
 
@@ -48,17 +50,11 @@ class WrappedComponent extends Component<IProps> {
       index => index + visibleStartIndex,
     );
 
-    console.log('visibleRange', visibleRange);
-
-    const areAllVisibleItemsSaved = visibleRange.every(index => {
-      console.log('visibleRange item', index, listData[index]);
-
-      return Boolean(listData[index]);
-    });
+    const areAllVisibleItemsSaved = visibleRange.every(index =>
+      Boolean(listData[index]),
+    );
 
     if (areAllVisibleItemsSaved) {
-      console.log('areAllVisibleItemsSaved');
-
       this.requestCache[keyToCache] = keyToCache;
       return;
     }
@@ -71,48 +67,56 @@ class WrappedComponent extends Component<IProps> {
   };
 
   getRow = ({ index, style }) => {
-    const item = this.props.listData[index];
-    const stringValue = item
-      ? `${item.username}: ${item.parameter}`
-      : 'Loading Complete';
+    const itemInList = this.props.listData[index];
+    const isItemLoaded = Boolean(itemInList);
 
     return (
-      <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
-        {stringValue}
+      <div className={cx('scrollerRow')} style={style}>
+        {isItemLoaded && (
+          <OrderCard
+            index={index + 1}
+            done={itemInList.isDone}
+            username={itemInList.username}
+            timestamp={itemInList.timestamp}
+          />
+        )}
       </div>
     );
   };
 
   render() {
     const { isItemLoaded, loadItems, getRow } = this;
-    const { totalNumberOfItems, numberOfViewItems } = this.props;
+    const { totalNumberOfItems, numberOfViewItems, isLoading } = this.props;
 
-    console.log('data in render', totalNumberOfItems, numberOfViewItems);
     return (
-      <div className={cx('list-window')}>
-        <AutoSizer>
-          {({ height, width }) => (
-            <InfiniteLoader
-              isItemLoaded={isItemLoaded}
-              loadMoreItems={loadItems}
-              itemCount={totalNumberOfItems}
-            >
-              {({ onItemsRendered, ref }) => (
-                <List
-                  itemCount={numberOfViewItems}
-                  className={cx('list')}
-                  height={height}
-                  itemSize={ITEM_SIZE}
-                  width={width}
-                  ref={ref}
-                  onItemsRendered={onItemsRendered}
-                >
-                  {getRow}
-                </List>
-              )}
-            </InfiniteLoader>
-          )}
-        </AutoSizer>
+      <div className={cx('scrollerListWrapper')}>
+        {isLoading ? (
+          <LoadingTextIndicator text="Загрузка" />
+        ) : (
+          <AutoSizer>
+            {({ height, width }) => (
+              <InfiniteLoader
+                isItemLoaded={isItemLoaded}
+                loadMoreItems={loadItems}
+                itemCount={totalNumberOfItems}
+              >
+                {({ onItemsRendered, ref }) => (
+                  <List
+                    itemCount={numberOfViewItems}
+                    className={cx('scrollerList')}
+                    height={height}
+                    itemSize={ITEM_SIZE}
+                    width={width}
+                    ref={ref}
+                    onItemsRendered={onItemsRendered}
+                  >
+                    {getRow}
+                  </List>
+                )}
+              </InfiniteLoader>
+            )}
+          </AutoSizer>
+        )}
       </div>
     );
   }
@@ -122,6 +126,7 @@ const mapStateToProps = store => ({
   listData: getListData(store),
   numberOfViewItems: getNumberOfViewItems(store),
   totalNumberOfItems: getTotalNumberOfItems(store),
+  isLoading: getLoadingStatus(store),
 });
 
 export const OrdersList = connect(

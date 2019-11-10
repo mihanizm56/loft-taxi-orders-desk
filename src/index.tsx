@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router5';
 import { configureRouter } from './services/router';
-import { createAppStore } from '@/services/_redux-store';
+import { createAppStore } from '@/services/_redux';
 import { RouteNode } from './services/router/components';
 import './_styles/index.css';
 import './_styles/variables.css';

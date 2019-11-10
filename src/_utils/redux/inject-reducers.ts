@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { createReducer } from './create-reducer';
-import { IAdvancedStore } from '@/services/_redux-store/_types';
+import { IAdvancedStore } from '@/services/_redux/_types';
 
 export const injectAsyncReducer = (
   store: IAdvancedStore,

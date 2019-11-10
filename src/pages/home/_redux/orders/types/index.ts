@@ -9,4 +9,6 @@ export type OrdersStoreType = {
   data: any;
   total: any;
   numberOfViewItems: any;
+  isLoading: boolean;
+  error?: string;
 };

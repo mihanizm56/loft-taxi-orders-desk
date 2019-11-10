@@ -11,10 +11,15 @@ export const getListData = createSelector(
 
 export const getNumberOfViewItems = createSelector(
   ordersStorageSelector,
-  ordersStorage => (ordersStorage ? ordersStorage.total : null),
+  ordersStorage => (ordersStorage ? ordersStorage.numberOfViewItems : null),
 );
 
 export const getTotalNumberOfItems = createSelector(
   ordersStorageSelector,
-  ordersStorage => (ordersStorage ? ordersStorage.numberOfViewItems : null),
+  ordersStorage => (ordersStorage ? ordersStorage.total : null),
+);
+
+export const getLoadingStatus = createSelector(
+  ordersStorageSelector,
+  ordersStorage => (ordersStorage ? ordersStorage.isLoading : null),
 );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Router, Route, State } from 'router5';
-import { IAdvancedStore } from '@/services/_redux-store/_types';
+import { IAdvancedStore } from '@/services/_redux/_types';
 
 export interface IAdvancedRoute extends Route, State {
   action?: IAction;
