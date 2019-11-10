@@ -1,24 +1,34 @@
 import { call, put } from 'redux-saga/effects';
-import { setOrdersAction, setOrdersError } from '../actions';
+import { setOrdersAction } from '../actions';
 import { ordersRequest } from '@/services/api/requests';
 
-export function* ordersWorkerSaga(page: number) {
+export function* ordersWorkerSaga({
+  visibleStartIndex,
+  numberOfViewItems,
+  listData,
+}: any) {
   console.info('ordersWorkerSaga goes');
-  // debugger; // сюда доходим
 
-  // fetch orders data
-  const {
-    error,
-    data: { orders = [] },
-  } = yield call(ordersRequest, page);
+  const updatedItems = { ...listData };
 
-  console.info('request data', error, orders);
+  const resultOfRequest: any = yield call(ordersRequest, visibleStartIndex);
 
-  // debugger; // сюда уже не доходим
-  if (error) {
-    console.info('put an error', error);
-    yield put(setOrdersError(error));
-  } else {
-    yield put(setOrdersAction(orders));
-  }
+  console.info('resultOfRequest', resultOfRequest);
+
+  const totalNumberOfItems = parseInt(resultOfRequest.data.totalElements);
+
+  const newNumberOfViewItems =
+    parseInt(numberOfViewItems) + resultOfRequest.data.orders.length;
+
+  resultOfRequest.data.orders.forEach((item, index) => {
+    updatedItems[index + visibleStartIndex] = item;
+  });
+
+  yield put(
+    setOrdersAction({
+      data: updatedItems,
+      total: totalNumberOfItems,
+      numberOfViewItems: newNumberOfViewItems,
+    }),
+  );
 }

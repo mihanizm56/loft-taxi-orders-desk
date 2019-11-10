@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
@@ -7,33 +6,40 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import styles from './index.module.scss';
 import {
-  fetchListData,
-  getListLength,
   getListData,
   getTotalNumberOfItems,
   getNumberOfViewItems,
+  fetchOrdersAction,
 } from '../../_redux/orders';
 
 const ITEM_SIZE = 35;
 const cx = classNames.bind(styles);
 
-class WrappedComponent extends Component {
-  componentDidUpdate(prevProps, prevState) {
-    console.log('UPDATED, PROPS', this.props);
+interface IProps {
+  listData: (store: any) => any;
+  numberOfViewItems: (store: any) => any;
+  totalNumberOfItems: number;
+  fetchListData: (payload: any) => any;
+}
 
-    if (prevProps.totalNumberOfItems !== prevProps.totalNumberOfItems) {
-      console.log('numberOfViewItems updated', prevProps.totalNumberOfItems);
-    }
+class WrappedComponent extends Component<IProps> {
+  requestCache: { [key: string]: string } = {};
+
+  componentDidUpdate() {
+    console.log('UPDATED, PROPS', this.props);
   }
 
   isItemLoaded = indexOfItem => Boolean(this.props.listData[indexOfItem]);
 
   loadItems = async (visibleStartIndex, visibleStopIndex) => {
+    console.log('triggers load data', visibleStartIndex, visibleStopIndex);
+
     const { listData, numberOfViewItems, fetchListData } = this.props;
 
     const keyToCache = `${visibleStartIndex}:${visibleStopIndex}`; // 0:10 format
 
     if (this.requestCache[keyToCache]) {
+      console.log('gets in cache');
       return;
     }
 
@@ -42,11 +48,17 @@ class WrappedComponent extends Component {
       index => index + visibleStartIndex,
     );
 
-    const areAllVisibleItemsSaved = visibleRange.every(index =>
-      Boolean(listData[index]),
-    );
+    console.log('visibleRange', visibleRange);
+
+    const areAllVisibleItemsSaved = visibleRange.every(index => {
+      console.log('visibleRange item', index, listData[index]);
+
+      return Boolean(listData[index]);
+    });
 
     if (areAllVisibleItemsSaved) {
+      console.log('areAllVisibleItemsSaved');
+
       this.requestCache[keyToCache] = keyToCache;
       return;
     }
@@ -75,6 +87,7 @@ class WrappedComponent extends Component {
     const { isItemLoaded, loadItems, getRow } = this;
     const { totalNumberOfItems, numberOfViewItems } = this.props;
 
+    console.log('data in render', totalNumberOfItems, numberOfViewItems);
     return (
       <div className={cx('list-window')}>
         <AutoSizer>
@@ -113,5 +126,5 @@ const mapStateToProps = store => ({
 
 export const OrdersList = connect(
   mapStateToProps,
-  { fetchListData },
+  { fetchListData: fetchOrdersAction },
 )(WrappedComponent);

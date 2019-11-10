@@ -5,7 +5,8 @@ export type Order = {
   timestamp: string;
 };
 
-export type OrdersState = {
-  orders: Array<Order>;
-  error: string;
+export type OrdersStoreType = {
+  data: any;
+  total: any;
+  numberOfViewItems: any;
 };

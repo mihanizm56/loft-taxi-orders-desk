@@ -2,12 +2,25 @@ import { take, fork } from 'redux-saga/effects';
 import { fetchOrdersAction } from '../actions';
 import { ordersWorkerSaga } from './orders-saga-worker';
 
-export function* formWatcherSaga() {
+export function* ordersWatcherSaga() {
   while (true) {
     const {
-      payload: { page },
-    }: { payload: { page: number } } = yield take(fetchOrdersAction.toString());
+      payload: { visibleStartIndex, numberOfViewItems, listData },
+    }: {
+      payload: {
+        visibleStartIndex: any;
+        numberOfViewItems: any;
+        listData: any;
+      };
+    } = yield take(fetchOrdersAction.toString());
 
-    yield fork(ordersWorkerSaga, page);
+    console.log(visibleStartIndex, numberOfViewItems, listData);
+
+    // debugger;
+    yield fork(ordersWorkerSaga, {
+      visibleStartIndex,
+      numberOfViewItems,
+      listData,
+    });
   }
 }

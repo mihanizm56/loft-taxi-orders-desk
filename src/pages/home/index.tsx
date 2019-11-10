@@ -5,7 +5,7 @@ import { injectAsyncSaga } from '@/_utils/redux/inject-sagas';
 import { IRouterDependecies } from '@/services/router/_types';
 import { Page } from './_components/page';
 import ordersReducer, {
-  formWatcherSaga,
+  ordersWatcherSaga,
   fetchOrdersAction,
 } from './_redux/orders';
 
@@ -15,9 +15,9 @@ const action = async ({ store }: IRouterDependecies) => {
   // const workers = [];
 
   injectAsyncReducer(store, 'orders', ordersReducer);
-  injectAsyncSaga(store, 'form-watcher', formWatcherSaga);
+  injectAsyncSaga(store, 'ordersWatcherSaga', ordersWatcherSaga);
 
-  store.dispatch(fetchOrdersAction({ page: 1 }));
+  // store.dispatch(fetchOrdersAction({ page: 1 }));
 
   return {
     title: 'Home',

@@ -37,7 +37,6 @@ module.exports = {
         devDependencies: ['**/*.test.js'],
       },
     ],
-    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     quotes: ['error', 'single'],
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/label-has-for': 0,
@@ -69,6 +68,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     'no-case-declarations': 0,
     'dot-notation': 0,
+    radix: 0,
   },
   settings: {
     'import/resolver': {
