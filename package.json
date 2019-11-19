@@ -11,6 +11,7 @@
     "@types/redux-actions": "^2.6.1",
     "babel-polyfill": "6.26.0",
     "classnames": "^2.2.6",
+    "cross-env": "^6.0.3",
     "customize-cra": "^0.8.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -45,7 +46,7 @@
   },
   "scripts": {
     "dev": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build:front": "cross-env NODE_ENV=production react-app-rewired build",
     "test:watch": "jest --watch",
     "test:ci": "set CI=true && jest",
     "lint-scripts": "eslint . --ext .ts,.js,.tsx",
@@ -57,7 +58,7 @@
     "commit": "npm run lint && git cz && git push",
     "stop:win": "taskkill /F /IM node.exe",
     "stop:lin": "killall node",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run build:front",
     "start": "node ./server"
   },
   "eslintConfig": {

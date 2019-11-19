@@ -10,7 +10,7 @@ export const createAppStore = () => {
 
   const store: IAdvancedStore = createStore(
     createReducer({ prevState: rootReducer }),
-    composeWithDevTools(applyMiddleware(sagaMiddleware)),
+    applyMiddleware(sagaMiddleware),
   );
 
   // Add a dictionary to keep track of the registered async reducers sagas
