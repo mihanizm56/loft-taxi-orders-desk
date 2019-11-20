@@ -45,7 +45,7 @@
   },
   "scripts": {
     "dev": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build:front": "react-app-rewired build",
     "test:watch": "jest --watch",
     "test:ci": "set CI=true && jest",
     "lint-scripts": "eslint . --ext .ts,.js,.tsx",
@@ -57,7 +57,7 @@
     "commit": "npm run lint && git cz && git push",
     "stop:win": "taskkill /F /IM node.exe",
     "stop:lin": "killall node",
-    "heroku-prebuild": "npm run build",
+    "heroku-prebuild": "npm run build:front",
     "start": "node ./server"
   },
   "eslintConfig": {
