@@ -12,8 +12,14 @@
     "babel-polyfill": "6.26.0",
     "classnames": "^2.2.6",
     "customize-cra": "^0.8.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
     "final-form": "4.18.5",
+    "helmet": "^3.21.2",
+    "http-errors": "^1.7.3",
     "moment": "2.24.0",
+    "morgan": "^1.9.1",
     "node-sass": "^4.13.0",
     "promise-sequential": "1.1.1",
     "react": "16.11.0",
@@ -38,7 +44,7 @@
     "typescript": "3.6.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "dev": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test:watch": "jest --watch",
     "test:ci": "set CI=true && jest",
@@ -50,7 +56,9 @@
     "lint": "git add . && lint-staged",
     "commit": "npm run lint && git cz && git push",
     "stop:win": "taskkill /F /IM node.exe",
-    "stop:lin": "killall node"
+    "stop:lin": "killall node",
+    "heroku-prebuild": "npm run build",
+    "start": "node ./server"
   },
   "eslintConfig": {
     "extends": "react-app"
