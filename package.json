@@ -19,7 +19,7 @@
     "final-form": "4.18.5",
     "helmet": "^3.21.2",
     "http-errors": "^1.7.3",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "morgan": "^1.9.1",
     "node-sass": "^4.13.0",
     "promise-sequential": "1.1.1",
